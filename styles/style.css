@@ -1,0 +1,8 @@
+@import url(reset.css);
+@import "https://fonts.googleapis.com/css?family=Special+Elite";
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Special Elite', sans-serif; }
+
+/*# sourceMappingURL=style.css.map */
