@@ -2,4 +2,21 @@ html *{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Special Elite', sans-serif;
+  input, button{
+    font-family: Helvetica, Arial, sans-serif;
+  }
+}
+.character{
+  margin: 1rem;
+  label{
+    display: block;
+  }
+  input, button{
+    &[type="number"]{
+      width: 1.5rem;
+    }
+  }
+  h3{
+    font-size: 1.5rem;
+  }
 }

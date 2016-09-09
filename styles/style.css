@@ -4,5 +4,16 @@ html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Special Elite', sans-serif; }
+  html * input, html * button {
+    font-family: Helvetica, Arial, sans-serif; }
+
+.character {
+  margin: 1rem; }
+  .character label {
+    display: block; }
+  .character input[type="number"], .character button[type="number"] {
+    width: 1.5rem; }
+  .character h3 {
+    font-size: 1.5rem; }
 
 /*# sourceMappingURL=style.css.map */
