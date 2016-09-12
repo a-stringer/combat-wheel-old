@@ -20,6 +20,14 @@ function CombatWheelViewModel() {
 
   self.inBattle = ko.observableArray();
 
+  self.initiatives = ko.computed(function(){
+    var inits = '';
+    for (i = 0; i < self.inBattle().length; i++) {
+      inits += self.inBattle()[i][0].init() + ",";
+    }
+    console.log(inits);
+  });
+
 
   self.addPartyMember = function(){
     self.party.push(new PartyMember("unnamed", 0, 0));
@@ -34,6 +42,7 @@ function CombatWheelViewModel() {
     self.inBattle.push(self.party.slice(index, (index + 1)));
     //console.log(self.inBattle()[0][0].init());
   }
+
 }
 
 ko.applyBindings(new CombatWheelViewModel());
