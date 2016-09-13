@@ -15,62 +15,30 @@
     <label>Join Battle Roll<input type="number" data-bind="value: init"></label>
     <label>DV Mod<input type="number" data-bind="value: dvMod"></label>
     <button data-bind="click: $root.joinBattle">Join Battle</button>
+    <button>Leave Battle</button>
     <button>Take Action</button>
-    <button data-bind="click: $root.removePartyMember">remove</button>
+    <button data-bind="click: $root.removePartyMember">DELETE</button>
   </figure>
 </section>
 <section>
   <button data-bind="click: addPartyMember">Add a Party Member</button>
-  <h2>Inits</h2>
-  <h2 data-bind="text: $root.initiatives"></h2>
 </section>
 <section>
   <button data-bind="click: startBattle">Start Battle</button>
+  <button data-bind="click: endBattle">End Battle</button>
   <h2>Current Tick:</h2>
   <button>Advance Tick</button>
   <table>
     <thead>
     <tr>
-      <td>Turn</td>
-      <td>Players</td>
+      <td>Tick</td>
+      <td>Combatants</td>
     </tr>
     </thead>
-    <tbody>
+    <tbody data-bind="foreach: battleOrder">
     <tr>
-      <td>0</td>
-      <td>
-        <ul>
-
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td></td>
+      <td data-bind="text: tickNo"></td>
+      <td data-bind="text: actsOnThisTick"></td>
     </tr>
     </tbody>
   </table>
