@@ -6,6 +6,11 @@ html *{
     font-family: Helvetica, Arial, sans-serif;
   }
 }
+section{
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+}
 .character{
   margin: 1rem;
   label{
