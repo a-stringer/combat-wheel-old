@@ -1,7 +1,7 @@
 function PartyMember(name, dvMod, init){
   var self = this;
 
-  self.name = name;
+  self.name = ko.observable(name);
   self.dvMod = ko.observable(dvMod);
   self.init = ko.observable(init);
 };
@@ -17,13 +17,14 @@ function CombatWheelViewModel() {
   var self = this;
 
   self.battleRunning = ko.observable(false);
+  self.currentTick = ko.observable();
 
   self.party = ko.observableArray([
     new PartyMember("Lexi", 0, 1),
     new PartyMember("Ian", 0, 2),
     new PartyMember("Ed", 0, 3),
-    new PartyMember("Mark", 0, 4),
-    new PartyMember("Ryan", 0, 5)
+    new PartyMember("Bash", 0, 4),
+    new PartyMember("Cole", 0, 5)
   ]);
 
   self.battleOrder = ko.observableArray([
@@ -57,6 +58,7 @@ function CombatWheelViewModel() {
     self.battleRunning(true);
     self.convertInits();
     self.placeCombatants();
+    self.goToTick(0);
   };
 
   self.endBattle = function(){
@@ -77,9 +79,13 @@ function CombatWheelViewModel() {
     for (i = 0; i < self.inBattle().length; i++) {
       console.log(self.inBattle()[i]);
       var newInit = self.inBattle()[i][0].init();
-      var combatant = self.inBattle()[i][0].name;
+      var combatant = self.inBattle()[i][0].name();
       self.battleOrder()[newInit].actsOnThisTick((self.battleOrder()[newInit].actsOnThisTick()) + combatant + ' ');
     }
+  };
+
+  self.goToTick = function(currentTick){
+    self.currentTick(currentTick);
   };
 }
 
