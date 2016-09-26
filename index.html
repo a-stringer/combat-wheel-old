@@ -12,9 +12,9 @@
   <article data-bind="foreach: party">
     <figure class="character">
       <h3 data-bind="text: name"></h3>
-      <label>Name<input data-bind="value: name, disable: $root.battleRunning"></label>
-      <label>Join Battle Roll<input type="number" data-bind="value: init, disable: $root.battleRunning"></label>
-      <label>DV Mod<input type="number" data-bind="value: dvMod, disable: $root.battleRunning"></label>
+      <label>Name<input data-bind="value: name, enable: $root.inputEnabled()"></label>
+      <label>Join Battle Roll<input type="number" data-bind="value: init, disable: $root.isBattleRunning"></label>
+      <label>DV Mod<input type="number" data-bind="value: dvMod, disable: $root.isBattleRunning"></label>
       <button data-bind="click: $root.joinBattle">Join Battle</button>
       <button data-bind="visible: ">Leave Battle</button>
       <button>Take Action</button>
@@ -25,8 +25,8 @@
 
 </section>
 <section>
-  <button data-bind="click: startBattle, visible: $root.battleRunning() === false">Start Battle</button>
-  <button data-bind="click: endBattle, visible: $root.battleRunning() === true">End Battle</button>
+  <button data-bind="click: startBattle, visible: $root.isBattleRunning() === false">Start Battle</button>
+  <button data-bind="click: endBattle, visible: $root.isBattleRunning() === true">End Battle</button>
   <h2>Current Tick: <span data-bind="text: currentTick"></span></h2>
   <button>Advance Tick</button>
   <table>
@@ -39,7 +39,7 @@
     <tbody data-bind="foreach: battleOrder">
     <tr>
       <td data-bind="text: tickNo"></td>
-      <td data-bind="text: actsOnThisTick"></td>
+      <td data-bind="text: actsOnThisTick()"></td>
     </tr>
     </tbody>
   </table>

@@ -10,13 +10,13 @@ function BattleTick(tickNo, actsOnThisTick){
   var self = this;
 
   self.tickNo = tickNo;
-  self.actsOnThisTick = ko.observable(actsOnThisTick);
+  self.actsOnThisTick = ko.observableArray();
 };
 
 function CombatWheelViewModel() {
   var self = this;
 
-  self.battleRunning = ko.observable(false);
+  self.isBattleRunning = ko.observable(false);
   self.currentTick = ko.observable();
 
   self.party = ko.observableArray([
@@ -28,14 +28,14 @@ function CombatWheelViewModel() {
   ]);
 
   self.battleOrder = ko.observableArray([
-    new BattleTick(0,''),
-    new BattleTick(1,''),
-    new BattleTick(2,''),
-    new BattleTick(3,''),
-    new BattleTick(4,''),
-    new BattleTick(5,''),
-    new BattleTick(6,''),
-    new BattleTick(7,'')
+    new BattleTick(0),
+    new BattleTick(1),
+    new BattleTick(2),
+    new BattleTick(3),
+    new BattleTick(4),
+    new BattleTick(5),
+    new BattleTick(6),
+    new BattleTick(7)
   ]);
 
   self.inBattle = ko.observableArray();
@@ -55,14 +55,22 @@ function CombatWheelViewModel() {
   };
 
   self.startBattle = function(){
-    self.battleRunning(true);
+    self.isBattleRunning(true);
     self.convertInits();
     self.placeCombatants();
     self.goToTick(0);
   };
 
   self.endBattle = function(){
-    self.battleRunning(false);
+    self.isBattleRunning(false);
+  };
+
+  self.inputEnabled = function(){
+    if (self.isBattleRunning() === false || self.currentTick === self.inBattle.indexOf(self.name)){
+      return true;
+    }else{
+      return false;
+    }
   };
 
   self.convertInits = function(){
@@ -80,12 +88,19 @@ function CombatWheelViewModel() {
       console.log(self.inBattle()[i]);
       var newInit = self.inBattle()[i][0].init();
       var combatant = self.inBattle()[i][0].name();
-      self.battleOrder()[newInit].actsOnThisTick((self.battleOrder()[newInit].actsOnThisTick()) + combatant + ' ');
+      self.battleOrder()[newInit].actsOnThisTick.push(combatant);
     }
   };
 
   self.goToTick = function(currentTick){
     self.currentTick(currentTick);
+    for (i = 0; i < self.inBattle().length; i++) {
+      var combatant = self.inBattle()[i][0].name();
+      self.disableFields(combatant);
+    }
+  };
+
+  self.disableFields = function(combatant){
   };
 }
 
