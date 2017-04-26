@@ -21,8 +21,8 @@ function CombatWheelViewModel() {
 
   self.party = ko.observableArray([
     new PartyMember("Lexi", 0, 1),
-    new PartyMember("Ian", 0, 2),
-    new PartyMember("Ed", 0, 3),
+    new PartyMember("Ben", 0, 2),
+    new PartyMember("Guy", 0, 3),
     new PartyMember("Bash", 0, 4),
     new PartyMember("Cole", 0, 5)
   ]);
@@ -51,6 +51,9 @@ function CombatWheelViewModel() {
 
   self.joinBattle = function(member){
     var index = self.party.indexOf(member);
+    var name = self.party()[index].name();
+    if (self.inBattle.indexOf())
+    {}else{}
     self.inBattle.push(self.party.slice(index, (index + 1)));
   };
 
@@ -63,6 +66,7 @@ function CombatWheelViewModel() {
 
   self.endBattle = function(){
     self.isBattleRunning(false);
+    self.removeCombatants();
   };
 
   self.inputEnabled = function(){
@@ -92,6 +96,10 @@ function CombatWheelViewModel() {
     }
   };
 
+  self.removeCombatants = function(){
+    self.inBattle.removeAll();
+  };
+
   self.goToTick = function(currentTick){
     self.currentTick(currentTick);
     for (i = 0; i < self.inBattle().length; i++) {
@@ -102,6 +110,15 @@ function CombatWheelViewModel() {
 
   self.disableFields = function(combatant){
   };
+}
+
+function arrayFirstIndexOf(array, predicate, predicateOwner) {
+  for (var i = 0, j = array.length; i < j; i++) {
+    if (predicate.call(predicateOwner, array[i])) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 ko.applyBindings(new CombatWheelViewModel());
